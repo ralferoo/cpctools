@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <stdio.h>
 
 #include  "Outils.h"
 using namespace std;

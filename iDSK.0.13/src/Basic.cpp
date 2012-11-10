@@ -2,6 +2,7 @@
 using namespace std;
 #include <math.h>
 #include <string.h>
+#include <stdio.h>
 #include "MyType.h"
 #include "Itoa.h"
 #include "Basic.h"
