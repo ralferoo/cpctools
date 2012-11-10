@@ -230,7 +230,7 @@ ID : 11  -  Turbo loading data block
 
 #define T_STATE_CONVERSION_FACTOR (TZX_T_STATES<<8)/(CPC_T_STATES>>8)
 /* pause between each block */
-#define CPC_PAUSE_AFTER_BLOCK_IN_MS	2500
+#define CPC_PAUSE_AFTER_BLOCK_IN_MS	3500
 /* pause between tape header and data for block */
 #define CPC_PAUSE_AFTER_HEADER_IN_MS 14
 
@@ -829,27 +829,6 @@ int		main(int argc, char *argv[])
 	if (argc==1)
 	{
 		DisplayInfo();
-	}
-	else
-	{
-		TZX_FILE *pTZXFile;
-		unsigned char *pSourceFilename;
-		unsigned char *pDestFilename;
-		unsigned char *pData;
-		unsigned long DataLength;
-        char c;
-
-		/* initialise defaults */
-		BaudRate = 2000;
-		Pause = 3000;
-		Type = 2;
-		TypeOverride = FALSE;
-		LoadAddressOverride = FALSE;
-		TZXWriteMethod = TZX_TURBO_LOADING_DATA_BLOCK;
-        BlankBeforeUse = FALSE;
-        ExecutionAddress = LoadAddress = 0x01000;
-		ExecutionAddressOverride = FALSE;
-		LoadAddressOverride = FALSE;
 
 		printf("-n              - Blank CDT file before use\n");
         printf("-b <number>	    - Specify Baud rate (default 2000)\n");
@@ -871,6 +850,27 @@ int		main(int argc, char *argv[])
 		printf("-r <tape filename>\n");
         printf("                - Add <input filename> as <tape filename> to CDT (rename file)\n");
 
+	}
+	else
+	{
+		TZX_FILE *pTZXFile;
+		unsigned char *pSourceFilename;
+		unsigned char *pDestFilename;
+		unsigned char *pData;
+		unsigned long DataLength;
+        char c;
+
+		/* initialise defaults */
+		BaudRate = 2000;
+		Pause = 3000;
+		Type = 2;
+		TypeOverride = FALSE;
+		LoadAddressOverride = FALSE;
+		TZXWriteMethod = TZX_TURBO_LOADING_DATA_BLOCK;
+        BlankBeforeUse = FALSE;
+        ExecutionAddress = LoadAddress = 0x01000;
+		ExecutionAddressOverride = FALSE;
+		LoadAddressOverride = FALSE;
 
         do
         {
