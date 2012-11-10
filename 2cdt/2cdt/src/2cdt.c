@@ -221,7 +221,8 @@ ID : 11  -  Turbo loading data block
 */
 
 /* 2 pulses per bit, tone is composed of 1 bits */
-#define CPC_PILOT_TONE_NUM_WAVES	(2048)
+#define CPC_PILOT_TONE_NUM_WAVES	1500
+//(2048)
 #define CPC_PILOT_TONE_NUM_PULSES (CPC_PILOT_TONE_NUM_WAVES*2)
 
 #define CPC_NOPS_PER_FRAME (19968)
@@ -230,9 +231,9 @@ ID : 11  -  Turbo loading data block
 
 #define T_STATE_CONVERSION_FACTOR (TZX_T_STATES<<8)/(CPC_T_STATES>>8)
 /* pause between each block */
-#define CPC_PAUSE_AFTER_BLOCK_IN_MS	3500
+#define CPC_PAUSE_AFTER_BLOCK_IN_MS	3000
 /* pause between tape header and data for block */
-#define CPC_PAUSE_AFTER_HEADER_IN_MS 14
+#define CPC_PAUSE_AFTER_HEADER_IN_MS 500
 
 void InitialiseStandardSpeedDataBlock(TZX_BLOCK *pBlock, int Pause)
 {
@@ -1248,7 +1249,8 @@ int		main(int argc, char *argv[])
                         }
 
                         /* write data into block */
-                        CPC_WriteDataBlock(pTZXFile, 0x016, &pData[FileOffset], TapeBlockSize,CPC_PAUSE_AFTER_BLOCK_IN_MS);
+			int p = (FileLengthRemaining == TapeBlockSize) ? 1 : CPC_PAUSE_AFTER_BLOCK_IN_MS;
+                        CPC_WriteDataBlock(pTZXFile, 0x016, &pData[FileOffset], TapeBlockSize, p);
 
                         BlockLocation+=TapeBlockSize;
                         BlockIndex++;
