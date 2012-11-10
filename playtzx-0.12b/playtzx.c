@@ -65,7 +65,7 @@ unsigned char *mem;		/* File in Memory */
 int pos;			/* Position in File */
 int curr;			/* Current block that is playing */
 int numblocks;			/* Total Num. of blocks */
-int block[2048];		/* Array of Block starts */
+int block[204800];		/* Array of Block starts */
 double cycle;			/* Freq/3500000 */
 
 char *sbbuf[2];			/* SB Buffers */
@@ -1195,6 +1195,9 @@ main(int argc, char *argv[])
 /* Go through the file and record block starts ... (not necessary, could just go right through it)*/
   while (pos < flen - 10) {
     block[numblocks] = pos;
+
+//	printf("block at offset %x\n", pos);
+//	printf("block at offset %x: %x\n", pos, mem[pos]);
 
     pos++;
     switch (mem[pos - 1]) {
